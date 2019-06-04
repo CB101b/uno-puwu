@@ -1,2 +1,2 @@
 # uno-private
-## A uno repository
+A uno repository
