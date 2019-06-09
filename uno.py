@@ -3,6 +3,8 @@
 
 import json
 import fn
+import time
+import random
 
 # read json file
 cards = json.load(open('cards.json','r'))
@@ -17,6 +19,14 @@ playerAlias.append(input("Enter player 2's name: "))
 playerAlias.append(input("Enter player 3's name: "))
 playerAlias.append(input("Enter player 4's name: "))
 
+for i in range(7):
+    for player in playerList:
+        distroCardType = random.choice(list(cards.keys()))
+        distroCard = random.choice(cards[distroCardType])
+        print(distroCard)
+        fn.moveCardToGameList(distroCard, player, cardsInGame['stack'])
+
+
 while 1:
     playRound = 0
     while playRound < 4:
@@ -25,5 +35,17 @@ while 1:
 
         print("It's "+currentPlayerAlias+"'s turn.",end='\n')
         print("You have: ", cardsInGame[currentPlayer], end='\n')
-        choice = input('Choose a card: ')
-        fn.moveCardToGameList(choice, currentPlayer)
+        def choiceloop():
+            choice = input('Choose a card: ')
+            if choice == '':
+                print("You haven't typed a card name. Please try again.")
+                time.sleep(0.5)
+                choiceloop()
+            else:
+                return(choice)
+        choice = str(choiceloop())
+        fn.moveCardToGameList(choice, currentPlayer, cardsInGame['stack'])
+        if playRound == 3:
+            playRound = 0
+        else:
+            playRound += 1

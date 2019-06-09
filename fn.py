@@ -14,8 +14,10 @@ def dumpCardsInGame(cardsInGameDictionary):
         json.dump(cardsInGameDictionary, dump)
 
 def cardRecognize(cardchoice):
+    if cardchoice == 'wild' or 'wild+':
+        return(cardchoice)
     tempSplit = cardchoice.split('#')[0]
-    if tempSplit == 'b':
+    elif tempSplit == 'b':
         return('blue')
     elif tempSplit == 'r':
         return('red')
@@ -24,9 +26,10 @@ def cardRecognize(cardchoice):
     elif tempSplit == 'y':
         return('yellow')
 
-def moveCardToGameList(cardchoice, currentPlayer):
+def moveCardToGameList(cardchoice, currentPlayer, cardStack):
     tempColor = cardRecognize(cardchoice)
+    print(tempColor)
     cards[tempColor].remove(cardchoice)
-    cardsInGame[currentPlayer].append(cardchoice)
+    cardStack.append(cardchoice)
     dumpCards(cards)
     dumpCardsInGame(cardsInGame)
