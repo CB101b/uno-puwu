@@ -17,7 +17,7 @@ def cardRecognize(cardchoice):
     if cardchoice == 'wild' or 'wild+':
         return(cardchoice)
     tempSplit = cardchoice.split('#')[0]
-    elif tempSplit == 'b':
+    if tempSplit == 'b':
         return('blue')
     elif tempSplit == 'r':
         return('red')
